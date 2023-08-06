@@ -1,0 +1,28 @@
+.home-nav-container{
+    border: 1px solid rgba(128, 128, 128, 0.353);
+    gap: 12px;
+    margin-top: 45px;
+    padding: 35px 20px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    border-radius: 12px;
+    box-shadow: 1px 1px 18px 1px rgba(0, 0, 0, 0.167);
+}
+.home-nav-container>ul{
+    list-style: none;
+}
+.home-nav-container>ul>li>a{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap:.8vmax;
+    padding: .7vmax;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    color: black;
+    transition: 0.2s;
+}
+.home-nav-container>ul>li>a:hover{
+    color: tomato;
+}

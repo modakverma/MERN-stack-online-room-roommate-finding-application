@@ -1,0 +1,107 @@
+.user-section-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    box-shadow: 1px 1px 18px 1px rgba(0, 0, 0, 0.167);
+    margin-bottom: 4vmax;
+    border-radius: 15px;
+    -webkit-box-shadow: 4px 2px 16px rgba(0,0,0,.15);
+    box-shadow: 4px 2px 16px rgba(0,0,0,.15);
+    display: -ms-flexbox;
+    display: flex;
+    gap: 10px;
+    max-width: 310px;
+    padding: 0 40px 40px;
+}
+.emoji-image{
+    position: absolute;
+    height: 110px;
+    left: 50%;
+    top: -42%;
+    -webkit-transform: translate(-50%,50%);
+    transform: translate(-50%,50%);
+    width: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.emoji-image>img{
+    height: 60px;
+    width: 60px;
+    box-shadow: 4px 2px 16px rgba(0,0,0,.15);
+    border-radius: 50%;
+}
+.padding-div{
+    padding-top: 35px;
+}
+.follow{
+    font-family:Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: space-between;
+}
+.follow>span{
+font-size: 20px;
+font-weight: 600;
+ display: flex;
+ flex-direction: column;
+}
+.follow>span>label{
+    font-weight: 500;
+ font-size: 15px;
+ color: rgba(0, 0, 0, 0.537);
+}
+
+.user-details{
+    font-family:Arial, Helvetica, sans-serif;
+    display: flex;
+    padding-top: 20px;
+    align-items: center;
+    flex-direction: column;
+}
+.user-details>span{
+    font-weight: 600;
+    font-size: 18px;
+}
+.user-details>a{
+    text-decoration: none;
+    color: black;
+    transition: 0.2s;
+    font-size: 16px;
+}
+.user-details>a:hover{
+    text-decoration: none;
+    color: tomato;
+}
+
+.welcome{
+    font-family:Arial, Helvetica, sans-serif;
+    color: rgba(0, 0, 0, 0.773);
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.post-button>button{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    border: 0;
+    background: tomato;
+    color: #fff;
+    border-radius: 15px;
+    transition: 0.2s;
+    font-size: 15px;
+    bottom: 0;
+    left: 50%;
+    -webkit-transform: translate(-50%,50%);
+    transform: translate(-50%,50%);
+    padding: 10px 24px;
+}
+.post-button>button:hover{
+    background-color: rgb(227, 95, 71);
+}

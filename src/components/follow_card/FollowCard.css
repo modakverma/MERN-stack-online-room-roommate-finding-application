@@ -1,0 +1,71 @@
+.followCard{
+    align-items: center;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 15px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 15px;
+    margin: 18px 0;
+    overflow: hidden;
+    padding: 15px 0 20px 20px;
+}
+.followCard>li{
+    grid-gap: 10px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 2fr 1fr auto;
+    width: 100%;
+}
+.followCard>li>a{
+    grid-gap: 10px;
+    -ms-flex-align: center;
+    align-items: center;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto 3fr;
+}
+.followCard>li>a>img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 12px grey;
+}
+.followCard>li>button{
+    border-radius: 5px;
+    font-size: var(--fs-small);
+    gap: 4px;
+    margin-left: auto;
+    padding: 5px;
+    width: auto;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: .2s;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color:rgba(0, 0, 0, 0.667) ;
+}
+.followCard>li>button>div{
+   color: tomato;
+}
+.followCard>li>button:hover{
+    background-color: rgba(128, 128, 128, 0.035);
+}
+.followCard>li>a{
+    list-style: none;
+    text-decoration: none;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+.list_info>span{
+    color: black;
+    line-height: 21px;
+    font-size: 12px;
+}
+.list_info>h4{
+    font-weight: 500;
+    color: black;
+    font-size: 16px;
+}
