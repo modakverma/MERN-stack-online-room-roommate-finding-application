@@ -1,56 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Article from '../components/Article'
+import Article from '../components/rooms-related/Article'
 import Navbar from '../components/navbar/Navbar'
 import LeftSection from '../pages/sections/LeftSection'
 import MiddleSection from '../pages/sections/MiddleSection'
 import RightSection from '../pages/sections/RightSection'
-import Announcement from '../components/Announcement'
+import Announcement from '../components/rooms-related/Announcement'
 import '../pages/Home.css'
-
-const cardArray = [
-  {
-    id: 1,
-    name: "Nutesh Kumar",
-    user_imgUrl: "/images/mirror-guy.jpg",
-    user_id: "@i_m_nitesh2",
-    postData: "🌟 Greetings, Members! 🌟🔥 Introducing our very first challenge! 🔥 Submit your incredible code for this mind-boggling problem and get ready for a chance to be featured with a shoutout on CipherSchools' Instagram page! 📸🎉👉🏼 Q: Given a binary tree, write an efficient algorithm to convert the binary tree into its mirror.#CodeMasters",
-    postImage: "	https://d3gmywgj71m21w.cloudfront.net/0183e2ac705ed35aa179f7d5d15fdae5.png",
-    likes: 2,
-    comments: 0,
-  },
-  {
-    id: 2,
-    name: "Nutesh Kumar",
-    user_imgUrl: "/images/mirror-guy.jpg",
-    user_id: "@i_m_nitesh2",
-    postData: "🌟 Greetings, Members! 🌟🔥 Introducing our very first challenge! 🔥 Submit your incredible code for this mind-boggling problem and get ready for a chance to be featured with a shoutout on CipherSchools' Instagram page! 📸🎉👉🏼 Q: Given a binary tree, write an efficient algorithm to convert the binary tree into its mirror.#CodeMasters",
-    postImage: "	https://d3gmywgj71m21w.cloudfront.net/0183e2ac705ed35aa179f7d5d15fdae5.png",
-    likes: 2,
-    comments: 0
-  },
-  {
-    id: 3,
-    name: "Nutesh Kumar",
-    user_imgUrl: "/images/mirror-guy.jpg",
-    user_id: "@i_m_nitesh2",
-    postData: "🌟 Greetings, Members! 🌟🔥 Introducing our very first challenge! 🔥 Submit your incredible code for this mind-boggling problem and get ready for a chance to be featured with a shoutout on CipherSchools' Instagram page! 📸🎉👉🏼 Q: Given a binary tree, write an efficient algorithm to convert the binary tree into its mirror.#CodeMasters",
-    postImage: "	https://d3gmywgj71m21w.cloudfront.net/0183e2ac705ed35aa179f7d5d15fdae5.png",
-    likes: 2,
-    comments: 0
-  },
-  {
-    id: 4,
-    name: "Nutesh Kumar",
-    user_imgUrl: "/images/mirror-guy.jpg",
-    user_id: "@i_m_nitesh2",
-    postData: "🌟 Greetings, Members! 🌟🔥 Introducing our very first challenge! 🔥 Submit your incredible code for this mind-boggling problem and get ready for a chance to be featured with a shoutout on CipherSchools' Instagram page! 📸🎉👉🏼 Q: Given a binary tree, write an efficient algorithm to convert the binary tree into its mirror.#CodeMasters",
-    postImage: "	https://d3gmywgj71m21w.cloudfront.net/0183e2ac705ed35aa179f7d5d15fdae5.png",
-    likes: 2,
-    comments: 0
-  },
-]
-
+import Rooms from '../components/rooms-related/Rooms'
+import Roommates from '../components/Roommates'
+import BestChoiceRoommate from '../components/BestChoiceRoommate'
+import AvailableRoommates from '../components/AvailableRoommates'
+import ListRoom from '../components/rooms-related/ListRoom'
 
 
 const Siteroutes = () => {
@@ -58,6 +19,16 @@ const Siteroutes = () => {
   const handleMode = (mode) => {
     setMode(mode);
   }
+
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:4000/api/rooms')
+      .then((response) => response.json())
+      .then((data) => setRooms(data))
+      .catch((error) => console.error('Error fetching rooms:', error));
+  }, []);
+  
   return (
     <BrowserRouter>
 
@@ -76,11 +47,21 @@ const Siteroutes = () => {
           }}
       >
           <div className='middle-section'>
-            <MiddleSection mode={mode} />
             <Routes>
-              <Route path='/announcement' element={<Announcement />} />
-              <Route path='/posts' element={<Article mode={mode} cardArray={cardArray} />} />
-              <Route path='/' element={<div
+
+            <Route path='/rooms' element={<Rooms mode={mode} rooms={rooms}/>} >
+                <Route path='best-picks' element={<Announcement mode={mode}/>}/>
+                <Route index element={<Article mode={mode} rooms={rooms}/>}/>
+            <Route path='list-space' element={<ListRoom mode={mode}/>}/>
+            </Route>
+            
+
+            <Route path='roommates' element={<Roommates/>}>
+                <Route index element={<AvailableRoommates/>}/>
+                <Route path='best-picks' element={<BestChoiceRoommate/>}/>
+            </Route>
+
+            <Route path='/' element={<div
                 style={{ backgroundColor: mode && "#1D242B" }}
               >
                 <img src="/images/home-illus.jpg" alt=""

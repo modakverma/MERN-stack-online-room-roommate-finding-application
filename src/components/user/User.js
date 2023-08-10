@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './User.css'
-import NearMeIcon from '@mui/icons-material/NearMe';
+import LoginIcon from '@mui/icons-material/Login';
+import { Link } from 'react-router-dom';
+import BaseModal from '../../pages/Auth/BaseModal';
 
 const User = ({ mode }) => {
+
+
+  const [isModalVisible,setIsModalVisible] = useState(false);
+  const toggleModal = ()=>{
+    setIsModalVisible(visibility=>!visibility);
+  }
+
   return (
+    <>
     <section className='user-section-container'
       style={{
         backgroundColor: !mode ? "#fff" : "#555763D6",
@@ -18,7 +28,7 @@ const User = ({ mode }) => {
           color: mode && 'tomato',
         }}
       >
-        <span>
+        {/* <span>
           27k
           <label htmlFor=""
             style={{
@@ -27,14 +37,13 @@ const User = ({ mode }) => {
           >
             Followers
           </label>
-        </span>
+        </span> */}
 
         <span className="emoji-image" >
-          <img alt="Logo" loading="lazy" src="/images/sad_face.png" width="100%" height="100%" class="style_rotate90__uupf7 style_mask__Z8nAx" />
+          <img src="/images/kiss.png" alt="" />
         </span>
-        <img src="https://www.plutonn.com/static/media/Mask.c87a2edc5f7bc40a251cbff35040b1cb.svg" alt="" className='emoji-image' />
-
-
+        
+{/* 
         <span>
           67
           <label htmlFor=""
@@ -44,39 +53,47 @@ const User = ({ mode }) => {
           >
             Following
           </label>
-        </span>
+        </span> */}
 
       </div>
 
       <div className="user-details">
         <span
           style={{
-            color: mode && 'tomato',
+            color: mode && '#90a1fe',
           }}
-        >ABC User</span>
-        <a href="https://"
+        >You Haven't Logged In</span>
+        <Link to="/profile"
           style={{
             color: mode && "#D3DEE6FF"
           }}
-        >@abc_platform</a>
+        >Take your usernaem now</Link>
       </div>
 
       <div className="welcome"
         style={{
-          color: mode && "#B5BEC4FF"
+          color: mode && "#B5BEC4FF",
+          textAlign:'center'
         }}
       >
-        <span>Hey! Welcome to Plutonn</span>
+        <span>Hey! Welcome to RoomSpace</span>
         <span>Share | Connect | Apply.</span>
 
       </div>
       <div className="post-button">
-        <button>
-          <NearMeIcon />
-          Post
+        <button
+        onClick={toggleModal}
+        >
+          <LoginIcon/>
+          {/* <Link to='/profile'>
+          Login
+          </Link> */}
+          Login
         </button>
       </div>
     </section>
+      <BaseModal isModalVisible={isModalVisible} onBackdropClick={toggleModal}/>
+    </>
   )
 }
 

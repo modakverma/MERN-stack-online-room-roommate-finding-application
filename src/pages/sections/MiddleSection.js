@@ -14,13 +14,13 @@ const MiddleSection = ({ mode }) => {
           }}
         >
           <div>
-            <img src="https://d3gmywgj71m21w.cloudfront.net/3b2976ba93bbe9d96b4ed00a4966bd87" alt="aa" />
+            <img src="/images/categories/hotel.png" alt="aa" />
             <div className="community_info" >
               <h2
                 style={{
-                  color: mode && 'tomato',
+                  color: mode && '#485FE4',
                 }}
-              >DSA Community</h2>
+              >ROOMS</h2>
               <h3
                 style={{
                   color: mode && '#D3DEE6FF',
@@ -33,7 +33,7 @@ const MiddleSection = ({ mode }) => {
           <div>
             <button
               style={{
-                color: mode && 'tomato',
+                color: mode && '#485FE4',
               }}
             >
               <AddIcon />
@@ -42,7 +42,7 @@ const MiddleSection = ({ mode }) => {
             <div>
               <button className='community_dots'
                 style={{
-                  color: mode && 'tomato',
+                  color: mode && '#485FE4',
                 }}
               >
                 <MoreVertIcon />
@@ -59,7 +59,7 @@ const MiddleSection = ({ mode }) => {
             borderBottom: mode && '1px solid #7C8387FF',
           }}
         >
-          <Link to="/posts">Post</Link>
+          <Link to="/posts">Find</Link>
           <Link to="/announcement">Announcement</Link>
         </ul>
         <section>
@@ -72,8 +72,6 @@ const MiddleSection = ({ mode }) => {
         </section>
       </div>
 
-      
-      
   )
 }
 

@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ShareIcon from '@mui/icons-material/Share';
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import ManIcon from '@mui/icons-material/Man';
+import GirlIcon from '@mui/icons-material/Girl';
+import WcIcon from '@mui/icons-material/Wc';
 
-const Article = ({mode, cardArray}) => {
+const Article = ({mode,rooms}) => {
+
+
+
+
     const navigate = useNavigate();
     const [follow,setFollow] = useState(false);
     const [emoji,setEmoji]= useState(false);
@@ -19,15 +27,15 @@ const Article = ({mode, cardArray}) => {
     }}
     >
         {
-          cardArray.map((item, index) => (
-            <div key={index} className="style_card"
+          rooms.map((item) => (
+            <div className="style_card"
               style={{
                 borderBottom: mode && '1px solid #7C8387FF',
               }}
             >
-              <li className="list_cardItem">
+              <li className="list_cardItem" key={item._id} >
                 <a href="/">
-                  <img src={item.user_imgUrl} alt=""
+                  <img src={item.user_imgUrl?item.user_imgUrl:'/images/user.png'} alt=""
                     style={{
                       boxShadow: mode && 'none',
                     }}
@@ -38,13 +46,13 @@ const Article = ({mode, cardArray}) => {
                         color: mode && '#AEB6BDFF',
                       }}
                     >
-                      {item.user_id}
+                      {item.lender}
                     </span>
                     <h4
                       style={{
                         color: mode && '#E1EDF5FF',
                       }}
-                    >{item.name}</h4>
+                    >{item.propertyName}</h4>
                   </div>
                 </a>
                 <button
@@ -53,21 +61,21 @@ const Article = ({mode, cardArray}) => {
                     else setFollow(true)
                 }}
                   style={{
-                    color: mode && 'tomato',
+                    color: mode && '#485FE4',
                   }}
                 >   
                   {
                     !follow ? <>
                     <AddIcon/>
-                    Follow
+                    Save
                     </>:
-                    'Following'
+                    'Saved'
                   }
                 </button>
                 <div>
                   <button
                     style={{
-                      color: mode && 'tomato',
+                      color: mode && '#485FE4',
                     }}
                   >
                     <MoreVertIcon />
@@ -77,34 +85,92 @@ const Article = ({mode, cardArray}) => {
 
               <div className="style_card_content"
               onClick={()=>{
-                navigate(`/post/${item.id}`)
+                navigate(`/post/${item._id}`)
               }}
               >
+                      <div>
+                        <div className="swiper swiper-initialized">
+                          <div className='swiper-wrapper'>
+                            <div className='swiper-slide'>
+                              <div className='style_image_wrapper'>
+                              {
+                                    item.images.map((image)=>(
+                                      <img src={image} alt="roomimage"/>
+                                    )
+                                  )
+                              } 
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 <div className="false style_content">
+                  <div className="property-essentials">
+                  <span>
+                    <h3>
+                    {item.price}
+                    </h3>
+                  </span>
+
+                  <span>
+                  <h4>
+                    {item.category}
+                  </h4>
+                  </span>
+
+                  <span>
+                  {
+                    item.genderRequirement===0 && <span>
+                      <ManIcon/> Only Males
+                    </span>
+                    
+                  }
+                  {
+                    item.genderRequirement===1 && <span>
+                      <GirlIcon/> Only Females
+                    </span>
+                  }
+                  {
+                  item.genderRequirement===2 && <span>
+                    <WcIcon/> Both Male & Female
+                  </span>
+                  }
+                  </span>
+                  
+                  <span>
+                    <LocationOnIcon/>
+                    {item.location}
+                  </span>
+                  </div>
+                 
+                 <div className="property-contact-info">
+                  <li>
+                    +91 {item.contact}
+                  </li>
+                  {/* {
+                    item.contact.map((item)=>(
+                      <li>
+                        {item}
+                      </li>
+                    ))
+                  } */}
+                 </div>
+
                   <p
                     style={{
                       color: mode && '#E1EDF5FF',
                     }}
+                    
                   >
-                    {item.postData}
+                   {'->'} {item.description}...
+                   
                   </p>
                 </div>
                 <a href="/"
                   style={{
                     color: mode && "#9BA3A8FF",
                   }}
-                >Read Less</a>
-                <div>
-                  <div className="swiper swiper-initialized">
-                    <div className='swiper-wrapper'>
-                      <div className='swiper-slide'>
-                        <div className='style_image_wrapper'>
-                          <img src={item.postImage} alt="" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                >Read More</a>
               </div>
 
               <div className='style_actions'>
@@ -115,7 +181,6 @@ const Article = ({mode, cardArray}) => {
                     }}
                   >
                     <ChatBubbleOutlineIcon />
-                    {item.comments}
                   </button>
                 </div>
 
@@ -151,9 +216,7 @@ const Article = ({mode, cardArray}) => {
                    </ul>
                  }
                   <ThumbUpIcon/>
-                  {item.likes}
                 </button>
-
 
                 <button className='style_action'
                   style={{
@@ -162,12 +225,10 @@ const Article = ({mode, cardArray}) => {
                 >
                   <ShareIcon />
                 </button>
-                <a href="/" className="style_link">
-                  <div>
-                    <img src="" alt="" />
-                    <img src="" alt="" />
-                  </div>
-                </a>
+        
+              <span className='post-date'>
+                Posted On: {item.date}
+              </span>
               </div>
             </div>
           ))

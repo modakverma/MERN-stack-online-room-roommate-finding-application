@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './HomeNav.css'
 import HomeIcon from '@mui/icons-material/Home';
-import GroupsIcon from '@mui/icons-material/Groups';
+import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import SearchIcon from '@mui/icons-material/Search';
-import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
+import RoofingIcon from '@mui/icons-material/Roofing';
 
 const HomeNav = ({ mode }) => {
   return (
@@ -26,13 +26,23 @@ const HomeNav = ({ mode }) => {
           </Link>
         </li>
         <li>
-          <Link to='/community'
+          <Link to='/rooms'
             style={{
               color: mode && "#D3DEE6FF"
             }}
           >
-            <GroupsIcon />
-            Community
+            <RoofingIcon/>
+            Rooms
+          </Link>
+        </li>
+        <li>
+          <Link to='/roommates'
+            style={{
+              color: mode && "#D3DEE6FF"
+            }}
+          >
+            <FaceRetouchingNaturalIcon/>
+            Roommates
           </Link>
         </li>
         <li>
@@ -43,16 +53,6 @@ const HomeNav = ({ mode }) => {
           >
             <SearchIcon />
             Search
-          </Link>
-        </li>
-        <li>
-          <Link to='/courses'
-            style={{
-              color: mode && "#D3DEE6FF"
-            }}
-          >
-            <VideoLibraryIcon />
-            Courses
           </Link>
         </li>
       </ul>

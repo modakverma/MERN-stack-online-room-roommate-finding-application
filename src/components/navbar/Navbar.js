@@ -44,14 +44,10 @@ const Navbar = ({ handleMode }) => {
         }}
         >
           <img src="/images/logo.png" alt="" />
-          <h2 class="header_logo-text"
-            style={{
-              color: toggle && 'tomato',
-            }}
-          >plutonn</h2>
+          <h2 class="header_logo-text">RoomSpace</h2>
         </li>
         <li>
-          <span>Community-Posts</span>
+          <span>Latest Updates</span>
         </li>
         <li>
           <span className="bell-icon">
@@ -84,7 +80,7 @@ const Navbar = ({ handleMode }) => {
             <Link to='/profile'>
               <img src="/images/profile.png" alt=""
                 style={{
-                  backgroundColor: toggle && 'tomato',
+                  backgroundColor: toggle && '#485FE4',
                   boxShadow: 'none'
                 }}
               />

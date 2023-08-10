@@ -2,12 +2,12 @@
     width: 100%;
     position: fixed;
     z-index: 121;
-    color: black;
 }
 .header_logo-text{
     font-family:monospace;
     font-weight: 600;
     font-size: 36px;
+    color: #485FE4;
 }
 .nav-bar>ul{
     padding: 12px;

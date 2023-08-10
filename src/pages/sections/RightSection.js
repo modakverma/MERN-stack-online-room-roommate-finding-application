@@ -58,7 +58,7 @@ const RightSection = ({ mode }) => {
             />
             <SearchIcon
               style={{
-                color: mode && 'tomato',
+                color: mode && '#485FE4',
               }}
             />
           </div>
@@ -95,7 +95,7 @@ const RightSection = ({ mode }) => {
               </a>
               <button
                 style={{
-                  color: mode && 'tomato',
+                  color: mode && '#485FE4',
                 }}
               >
                 <AddIcon />
