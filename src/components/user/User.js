@@ -40,7 +40,7 @@ const User = ({ mode }) => {
   useEffect(() => {
     var userInfo = JSON.parse(localStorage.getItem('userInfo'));
     setUserToken(userInfo? userInfo.token: null);
-    callAboutPage();
+    // callAboutPage();
   }, [userToken,handleLogout]);
 
   return (
