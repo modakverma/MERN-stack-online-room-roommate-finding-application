@@ -25,9 +25,9 @@ const Navbar = ({ handleMode }) => {
      setNotify(true)
   },2700)
   }
-  useEffect(()=>{
-    showAlert();
-  },[])
+  // useEffect(()=>{
+  //   showAlert();
+  // },[])
 
   return (
     <div className='nav-bar'

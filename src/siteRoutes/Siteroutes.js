@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Article from '../components/rooms-related/Article'
 import Navbar from '../components/navbar/Navbar'
 import LeftSection from '../pages/sections/LeftSection'
-import MiddleSection from '../pages/sections/MiddleSection'
 import RightSection from '../pages/sections/RightSection'
 import Announcement from '../components/rooms-related/Announcement'
 import '../pages/Home.css'
@@ -12,7 +11,8 @@ import Roommates from '../components/Roommates'
 import BestChoiceRoommate from '../components/BestChoiceRoommate'
 import AvailableRoommates from '../components/AvailableRoommates'
 import ListRoom from '../components/rooms-related/ListRoom'
-
+import Room from '../components/rooms-related/Room'
+import AboutUs from '../pages/About/AboutUs'
 
 const Siteroutes = () => {
   const [mode, setMode] = useState(false);
@@ -21,12 +21,11 @@ const Siteroutes = () => {
   }
 
   const [rooms, setRooms] = useState([]);
-
   useEffect(() => {
-    fetch('http://localhost:4000/api/rooms')
-      .then((response) => response.json())
-      .then((data) => setRooms(data))
-      .catch((error) => console.error('Error fetching rooms:', error));
+      fetch('http://localhost:4000/api/rooms')
+        .then((response) => response.json())
+        .then((data) => setRooms(data))
+        .catch((error) => console.error('Error fetching rooms:', error));
   }, []);
   
   return (
@@ -39,7 +38,7 @@ const Siteroutes = () => {
           color: !mode ? "black" : "#838485"
         }}
       >
-        <LeftSection mode={mode}/>
+        <LeftSection mode={mode} rooms={rooms} />
 
       <div className="community_container_outer"
           style={{
@@ -54,7 +53,10 @@ const Siteroutes = () => {
                 <Route index element={<Article mode={mode} rooms={rooms}/>}/>
             <Route path='list-space' element={<ListRoom mode={mode}/>}/>
             </Route>
-            
+
+            <Route path='/room/:id' element={<Room mode={mode} />} />
+
+            <Route path='/profile' element={<AboutUs/>} />
 
             <Route path='roommates' element={<Roommates/>}>
                 <Route index element={<AvailableRoommates/>}/>

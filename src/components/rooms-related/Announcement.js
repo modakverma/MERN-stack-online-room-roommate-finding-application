@@ -2,8 +2,14 @@ import React from 'react'
 
 const Announcement = () => {
   return (
-    <div>
-     Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel earum optio placeat veniam deleniti est facilis nostrum expedita. Ratione ea repudiandae vel incidunt quasi quod magnam nemo. Voluptas officia fugiat odit non nesciunt!
+    <div className='best-picks'>
+     <div className="filter-data">
+      <span>List your requirements: </span>
+      <input type="text" />
+     </div>
+     <div className="filtered-products">
+      
+     </div>
     </div>
   )
 }

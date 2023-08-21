@@ -8,8 +8,9 @@ import WcIcon from '@mui/icons-material/Wc';
 import WomanIcon from '@mui/icons-material/Woman';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PersonIcon from '@mui/icons-material/Person';
-import axios from 'axios';
+import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../footer/Footer';
 
 const ListRoom = () => {
     const navigate = useNavigate();
@@ -22,35 +23,49 @@ const ListRoom = () => {
     const [propertyName, setPropertyName] = useState('');
     const [lender, setLender] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(20000);
+    const [price, setPrice] = useState(0);
     const [location, setLocation] = useState('');
     const [genderRequirement, setGenderRequirement] = useState(2);
-    const [images, setImages] = useState(["https://images.unsplash.com/photo-1598928506311-c55ded91a20c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"]);
+    const [images, setImages] = useState(null);
     const [contact, setContact] = useState('');
     const [propType,setPropType] = useState('');
+
+    const handleImage=(e)=>{
+      const reader = new FileReader();
+      reader.onload = ()=>{
+        if(reader.readyState === 2 ){
+          setImages(reader.result)
+        }
+      };
+     reader.readAsDataURL(e.target.files[0]);
+    }
 
 
     const handleRegisterRoom = async(e) => {
         e.preventDefault();
+
         const today = new Date();
         const formattedDate = `${today.getDate().toString()}-${(today.getMonth()+1).toString()}-${today.getFullYear().toString()}`;
         console.log('Date:',formattedDate);
         console.log('DateType:',typeof formattedDate);
 
+        const formData = new FormData();
+        formData.append('propertyName',propertyName);
+        formData.append('lender',lender);
+        formData.append('description',description);
+        formData.append('price',price);
+        formData.append('location',location);
+        formData.append('genderRequirement',genderRequirement);
+        formData.append('contact',contact);
+        formData.append('images',images);
+        formData.append('category',propType);
+        formData.append('date',formattedDate);
+
         try {
-          const response = await axios.post('http://localhost:4000/api/rooms/register', {
-            propertyName,
-            lender,
-            description,
-            price,
-            location,
-            genderRequirement,
-            contact,
-            images,
-            category:propType,
-            date:formattedDate,
-          },
-        );
+        const response = await fetch('http://localhost:4000/api/rooms/register', {
+        method: 'POST',
+        body: formData, 
+        });
           if (response.status === 201) {
             alert('Room registered successfully');
             navigate('/rooms')
@@ -64,6 +79,7 @@ const ListRoom = () => {
     
 
   return (
+    <>
     <div className="list-space-container">
     <form className='list-space'
     onSubmit={handleRegisterRoom}
@@ -73,7 +89,7 @@ const ListRoom = () => {
       <div className="property-details1">
          <div className="property-image">
             <div>
-            <input type="file" accept='images/*' />
+            <input type="file" accept='images/*' onChange={handleImage} />
             </div>
          </div>
          <div className="property-title">
@@ -160,7 +176,8 @@ const ListRoom = () => {
         </div>
         <div className="property-price">
             <label htmlFor="">Price:</label>
-            <input type='range'/>
+            <input value={price} type='range' min='0' max='50000' step='100' onChange={(e)=>setPrice(e.target.value)} />
+            <h3>{price} RS</h3>
         </div>
       </div>
 
@@ -192,6 +209,13 @@ const ListRoom = () => {
              >
                 <WcIcon/>
              </li>
+             <li
+             onClick={()=>
+                setGenderRequirement(3)
+               }
+             >
+                <FamilyRestroomIcon/>
+             </li>
              {genderRequirement}
             </ul>
         </div>
@@ -218,6 +242,8 @@ const ListRoom = () => {
        </div>
     </form>
     </div>
+    <Footer/>
+    </>
   )
 }
 

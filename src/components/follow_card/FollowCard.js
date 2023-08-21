@@ -1,60 +1,19 @@
 import React from 'react'
 import './FollowCard.css'
 import AddIcon from '@mui/icons-material/Add';
+import { Link, useNavigate } from 'react-router-dom';
 
-const cardData = [
-  {
-    img_url: "/images/logo.png",
-    host: "@cipherschools",
-    hostName: "Cipher...",
-  },
-  {
-    img_url: "/images/logo.png",
-    host: "@cipherschools",
-    hostName: "Cipher...",
-  },
-  {
-    img_url: "/images/logo.png",
-    host: "@cipherschools",
-    hostName: "Cipher...",
-  },
-  {
-    img_url: "/images/logo.png",
-    host: "@cipherschools",
-    hostName: "Cipher...",
-  },
-  {
-    img_url: "/images/logo.png",
-    host: "@cipherschools",
-    hostName: "Cipher...",
-  },
-  {
-    img_url: "/images/logo.png",
-    host: "@cipherschools",
-    hostName: "Cipher...",
-  },
-  {
-    img_url: "/images/logo.png",
-    host: "@cipherschools",
-    hostName: "Cipher...",
-  },
-  {
-    img_url: "/images/logo.png",
-    host: "@cipherschools",
-    hostName: "Cipher...",
-  },
-  {
-    img_url: "/images/logo.png",
-    host: "@cipherschools",
-    hostName: "Cipher...",
-  },
-  {
-    img_url: "/images/logo.png",
-    host: "@cipherschools",
-    hostName: "Cipher...",
-  },
-]
-const FollowCard = ({ mode }) => {
+const FollowCard = ({ mode,rooms }) => {
+  const navigate = useNavigate();
+  function compare( a, b ) {
+    if ( a.ratings < b.ratings ){
+      return -1;
+    }
+    if ( a.ratings > b.ratings ){
+      return 1;
+    }
+    return 0;
+  }
   return (
 
     <section class="followCard"
@@ -63,36 +22,36 @@ const FollowCard = ({ mode }) => {
         color: !mode ? "black" : "#838485"
       }}
     >
-
+          <span>Top Properties</span>
       {
-        cardData.map((item, index) => (
+      rooms.sort(compare).slice(0,4).map((item, index) => (
           <li key={index}>
-            <a href="/profile">
-              <img src={item.img_url} alt="" />
+            <Link to={`/room/${item._id}`}>
+              <img src={item.images} alt="" />
               <div className="list_info">
                 <span
                   style={{
                     color: mode && "#B5BEC4FF"
                   }}
                 >
-                  {item.host}
+                  {item.lender}
                 </span>
                 <h4
                   style={{
                     color: mode && "#D3DEE6FF"
                   }}
                 >
-                  {item.hostName}
+                  {item.propertyName}
                 </h4>
               </div>
-            </a>
+            </Link>
             <button
               style={{
                 color: mode && 'tomato',
               }}
             >
               <AddIcon />
-              Follow
+              Save
             </button>
           </li>
         )

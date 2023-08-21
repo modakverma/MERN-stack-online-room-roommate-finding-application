@@ -4,6 +4,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 const Rooms = ({mode,rooms}) => {
   return (
+    <>
     <div className="community_topHeader">
     <header
       style={{
@@ -62,6 +63,8 @@ const Rooms = ({mode,rooms}) => {
     </section>
     <Outlet/>
   </div>
+    </>
+
   )
 }
 

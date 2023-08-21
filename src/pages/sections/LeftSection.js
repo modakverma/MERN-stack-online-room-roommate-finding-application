@@ -3,7 +3,7 @@ import FollowCard from '../../components/follow_card/FollowCard'
 import HomeNav from '../../components/home_navigation/HomeNav'
 import User from '../../components/user/User'
 
-const LeftSection = ({ mode }) => {
+const LeftSection = ({ mode, rooms }) => {
   return (
     <div className='left-section'
       style={{
@@ -13,7 +13,7 @@ const LeftSection = ({ mode }) => {
     >
       <User mode={mode} />
       <HomeNav mode={mode} />
-      <FollowCard mode={mode} />
+      <FollowCard mode={mode} rooms={rooms} />
     </div>
   )
 }
